@@ -12,9 +12,17 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Condition extends ConditionAbstract
 {
+    const CONDITION_EQUAL = 'equal';
     const CONDITION_IN = 'in';
     const CONDITION_NOT_IN = 'not_in';
-
+    const CONDITION_LIKE = 'like';
+    const CONDITION_LIKE_LEFT = 'like_left';
+    const CONDITION_LIKE_RIGHT = 'like_right';
+    const CONDITION_BETWEEN = 'between';
+    const CONDITION_GREATER = 'greater';
+    const CONDITION_LESS = 'less';
+    const CONDITION_GREATER_EQUAL = 'greater_equal';
+    const CONDITION_LESS_EQUAL = 'less_equal';
 
     /**
      * @var string
@@ -27,8 +35,17 @@ class Condition extends ConditionAbstract
     public static function conditions(): array
     {
         return [
+            self::CONDITION_EQUAL,
             self::CONDITION_IN,
             self::CONDITION_NOT_IN,
+            self::CONDITION_LIKE,
+            self::CONDITION_LIKE_LEFT,
+            self::CONDITION_LIKE_RIGHT,
+            self::CONDITION_BETWEEN,
+            self::CONDITION_GREATER,
+            self::CONDITION_GREATER_EQUAL,
+            self::CONDITION_LESS,
+            self::CONDITION_LESS_EQUAL,
         ];
     }
 
@@ -80,6 +97,6 @@ class Condition extends ConditionAbstract
      */
     public static function from($value): array
     {
-        // TODO: Implement from() method.
+        return [];
     }
 }
