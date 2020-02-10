@@ -2,6 +2,7 @@
 
 namespace Creatortsv\EloquentPipelinesModifier\Conditions;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -48,7 +49,7 @@ class Condition extends ConditionAbstract
     public function parse(): Closure
     {
         /** value = {"user_id": { "in":[2] }} */
-        return (function (Builder &$builder): void {
+        return (function (Builder $builder): void {
             foreach ($this->value as $key => $value) {
                 switch ($key) {
                     case self::CONDITION_IN:
@@ -59,11 +60,15 @@ class Condition extends ConditionAbstract
                         break;
                     default:
                         if (is_array($value)) {
-                            (new self($value, $key))->parse()($builder);
+                            $builder->where((new self($value, $key))->parse());
                             break;
                         }
 
-                        $builder->where($key, $value);
+                        if (($date = Carbon::parse($value))->isValid()) {
+                            $builder->whereDate($key, $date);
+                        } else {
+                            $builder->where($key, $value);
+                        }
                 }
             }
         })->bindTo($this);
