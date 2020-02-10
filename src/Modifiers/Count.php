@@ -23,17 +23,20 @@ class Count extends Modifier
     protected function apply(Builder $builder): Builder
     {
         if (is_string($this->value)) {
+        /** Simple string */
             return $builder->withCount(Association::from($this->value));
         }
 
         if (is_array($this->value)) {
             $keys = [];
+        /** First make simple property:value json elements  */
             $counts = Association::from(array_filter($this->value, (function ($value, string $key) use (&$keys): bool {
                 return is_string($value) || !($key && ($keys[] = $key));
             })->bindTo($this), ARRAY_FILTER_USE_BOTH));
 
             foreach ($keys as $key) {
-                $counts[(new Association($key))->parse()] = (new Condition($this->value[$key]))->parse();
+                $full = ($association = new Association($key))->parse();
+                $counts[$full] = (new Condition($this->value[$key], $association->name))->parse();
             }
 
             return $builder->withCount($counts);

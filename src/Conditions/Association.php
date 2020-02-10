@@ -9,11 +9,26 @@ namespace Creatortsv\EloquentPipelinesModifier\Conditions;
 class Association extends ConditionAbstract
 {
     /**
+     * @var string
+     */
+    public $name;
+
+    /**
+     * @var string
+     */
+    public $alias;
+
+    /**
      * @return string
      */
     public function parse(): string
     {
-        return str_replace(config('modifier.delimiters.associations'), ' as ', $this->value);
+        $result = str_replace(config('modifier.delimiters.associations'), ' as ', $this->value);
+        $sections = explode(' as ', $result);
+        $this->name = $sections[0];
+        $this->alias = $sections[1] ?? null;
+
+        return $result;
     }
 
     /**
