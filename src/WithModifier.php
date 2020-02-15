@@ -2,18 +2,18 @@
 
 namespace Creatortsv\EloquentPipelinesModifier;
 
-use Creatortsv\EloquentPipelinesModifier\Modifiers\Modifier;
+use Creatortsv\EloquentPipelinesModifier\Modifiers\ModifierAbstract;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pipeline\Pipeline;
 
 /**
- * Trait WithRequestModifier
+ * Trait WithModifier
  * @package Creatortsv\EloquentPipelinesModifier
  */
-trait WithRequestModifier
+trait WithModifier
 {
     /**
-     * @param Modifier[] $modifiers
+     * @param ModifierAbstract[] $modifiers
      * @return Builder
      */
     public static function modify(array $modifiers = []): Builder

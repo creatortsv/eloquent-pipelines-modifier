@@ -7,16 +7,12 @@ use Creatortsv\EloquentPipelinesModifier\Conditions\Condition;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Class CountModifier
+ * Class Count
  * @package Creatortsv\EloquentPipelinesModifier\Modifiers
  */
-class Count extends Modifier
+class Count extends ModifierAbstract
 {
     /**
-     * - 'one,two:alias_two'
-     * - ['one','two:alias_two']
-     * - {'one': 'alias_one', 'two': condition, 'three:alias_three': condition}
-     *
      * @param Builder $builder
      * @return Builder
      */

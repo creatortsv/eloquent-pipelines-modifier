@@ -2,14 +2,14 @@
 
 namespace Creatortsv\EloquentPipelinesModifier\Modifiers;
 
-use Creatortsv\EloquentPipelinesModifier\Conditions\Association;
+use Creatortsv\EloquentPipelinesModifier\Conditions\Condition;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Class Select
+ * Class Filter
  * @package Creatortsv\EloquentPipelinesModifier\Modifiers
  */
-class Select extends ModifierAbstract
+class Filter extends ModifierAbstract
 {
     /**
      * @param Builder $builder
@@ -17,21 +17,21 @@ class Select extends ModifierAbstract
      */
     protected function apply(Builder $builder): Builder
     {
-        return $builder->select(Association::from($this->value));
+        if (is_array($this->value)) {
+            $builder->where((new Condition($this->value))->parse());
+        }
+
+        return $builder;
     }
 
     /**
      * @param string $value
-     * @return mixed
+     * @return array|null
      */
     protected function extract(string $value)
     {
         if (($json = json_decode($value, true)) !== null) {
             return $json;
-        }
-
-        if ((bool)preg_match('/^[a-z][a-z_.,:]+[a-z]$/', $value)) {
-            return $value;
         }
 
         return null;

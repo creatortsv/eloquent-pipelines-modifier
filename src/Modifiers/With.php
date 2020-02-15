@@ -2,22 +2,32 @@
 
 namespace Creatortsv\EloquentPipelinesModifier\Modifiers;
 
-use Creatortsv\EloquentPipelinesModifier\Conditions\Association;
+use Creatortsv\EloquentPipelinesModifier\Conditions\Condition;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * Class Select
+ * Class With
  * @package Creatortsv\EloquentPipelinesModifier\Modifiers
  */
-class Select extends ModifierAbstract
+class With extends ModifierAbstract
 {
+
     /**
      * @param Builder $builder
      * @return Builder
      */
     protected function apply(Builder $builder): Builder
     {
-        return $builder->select(Association::from($this->value));
+        if (is_string($this->value)) {
+            return $builder->with($this->value);
+        }
+
+        $data = [];
+        foreach ($this->value as $key => $value) {
+            $data[$key] = is_string($key) ? (new Condition($value))->parse() : $value;
+        }
+
+        return $builder->with($data);
     }
 
     /**

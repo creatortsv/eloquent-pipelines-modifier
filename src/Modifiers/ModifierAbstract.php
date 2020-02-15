@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
  * Class Modifier
  * @package Creatortsv\EloquentPipelinesModifier\Modifiers
  */
-abstract class Modifier
+abstract class ModifierAbstract
 {
     /**
      * @var string
