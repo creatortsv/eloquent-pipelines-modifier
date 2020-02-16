@@ -2,11 +2,39 @@
 
 namespace Tests\Unit;
 
+use Closure;
 use Creatortsv\EloquentPipelinesModifier\Conditions\Association;
+use Illuminate\Foundation\Application;
 use PHPUnit\Framework\TestCase;
 
 class AssociationTest extends TestCase
 {
+    /**
+     * @return void
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $app = new Application('../../');
+        $app->bind('config', function () {
+            return new class {
+                public function get(string $key, $default = null)
+                {
+                    foreach (explode('.', $key) as $i => $string) {
+                        if ($i === 0) {
+                            $result = include '../../config/' . $string . '.php';
+                        } else {
+                            $result = ($result ?? [])[$string] ?? [];
+                        }
+                    }
+
+                    return $result ?? $default;
+                }
+            };
+        });
+    }
+
     /**
      * @test
      * @return void

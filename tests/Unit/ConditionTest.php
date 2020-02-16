@@ -4,10 +4,37 @@ namespace Tests\Unit;
 
 use Carbon\Carbon;
 use Creatortsv\EloquentPipelinesModifier\Conditions\Condition;
+use Illuminate\Foundation\Application;
 use PHPUnit\Framework\TestCase;
 
 class ConditionTest extends TestCase
 {
+    /**
+     * @return void
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $app = new Application('../../');
+        $app->bind('config', function () {
+            return new class {
+                public function get(string $key, $default = null)
+                {
+                    foreach (explode('.', $key) as $i => $string) {
+                        if ($i === 0) {
+                            $result = include '../../config/' . $string . '.php';
+                        } else {
+                            $result = ($result ?? [])[$string] ?? [];
+                        }
+                    }
+
+                    return $result ?? $default;
+                }
+            };
+        });
+    }
+
     /**
      * @test
      * @return void
