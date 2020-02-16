@@ -2,9 +2,7 @@
 
 namespace Tests\Unit;
 
-use Carbon\Carbon;
 use Creatortsv\EloquentPipelinesModifier\Conditions\Association;
-use Creatortsv\EloquentPipelinesModifier\Conditions\Condition;
 use Tests\TestCase;
 
 class AssociationTest extends TestCase
