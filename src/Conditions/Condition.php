@@ -67,18 +67,19 @@ class Condition extends ConditionAbstract
      * @param mixed $value
      * @return string
      */
-    protected static function whichMethod(string $key, $value): string
+    public static function whichMethod(string $key, $value): string
     {
         $method = 'where';
 
         try {
-            $isDate = is_string($value) && Carbon::parse($value)->isValid();
+            $isDate = ($value instanceof Carbon || is_string($value)) && Carbon::parse($value)->isValid();
         } catch (Exception $e) {
             $isDate = false;
         }
 
         if ($isDate && in_array($key, [
             self::CONDITION_EQUAL,
+            self::CONDITION_NOT_EQUAL,
             self::CONDITION_GREATER,
             self::CONDITION_GREATER_EQUAL,
             self::CONDITION_LESS,
@@ -104,7 +105,7 @@ class Condition extends ConditionAbstract
      * @param $value
      * @return array
      */
-    protected static function whichArgs(string $key, $value): array
+    public static function whichArgs(string $key, $value): array
     {
         $args = [];
         switch ($key) {
@@ -140,6 +141,12 @@ class Condition extends ConditionAbstract
             self::CONDITION_NOT_BETWEEN,
         ])) {
             $args[] = (array)$value;
+        } else if ($key === self::CONDITION_LIKE) {
+            $args[] = "%$value%";
+        } else if ($key === self::CONDITION_LIKE_LEFT) {
+            $args[] = "$value%";
+        } else if ($key === self::CONDITION_LIKE_RIGHT) {
+            $args[] = "%$value";
         } else {
             $args[] = $value;
         }
@@ -180,17 +187,6 @@ class Condition extends ConditionAbstract
     public static function from($value): array
     {
         return [];
-    }
-
-    /**
-     * Condition constructor.
-     * @param $value
-     * @param string|null $name
-     */
-    public function __construct($value, string $name = null)
-    {
-        $this->name = $name;
-        parent::__construct($value);
     }
 
     /**
