@@ -141,11 +141,11 @@ class Condition extends ConditionAbstract
             self::CONDITION_NOT_BETWEEN,
         ])) {
             $args[] = (array)$value;
-        } else if ($key === self::CONDITION_LIKE) {
+        } elseif ($key === self::CONDITION_LIKE) {
             $args[] = "%$value%";
-        } else if ($key === self::CONDITION_LIKE_LEFT) {
+        } elseif ($key === self::CONDITION_LIKE_LEFT) {
             $args[] = "$value%";
-        } else if ($key === self::CONDITION_LIKE_RIGHT) {
+        } elseif ($key === self::CONDITION_LIKE_RIGHT) {
             $args[] = "%$value";
         } else {
             $args[] = $value;

@@ -64,11 +64,11 @@ abstract class ModifierAbstract
      * @param Builder $builder
      * @return Builder
      */
-    protected abstract function apply(Builder $builder): Builder;
+    abstract protected function apply(Builder $builder): Builder;
 
     /**
      * @param string $value
      * @return mixed
      */
-    protected abstract function extract(string $value);
+    abstract protected function extract(string $value);
 }

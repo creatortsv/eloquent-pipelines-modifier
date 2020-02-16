@@ -25,11 +25,11 @@ abstract class ConditionAbstract
     /**
      * @return mixed
      */
-    public abstract function parse();
+    abstract public function parse();
 
     /**
      * @param mixed $value
      * @return mixed
      */
-    public static abstract function from($value): array;
+    abstract public static function from($value): array;
 }
