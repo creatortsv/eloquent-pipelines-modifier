@@ -23,7 +23,7 @@ class ConditionTest extends TestCase
                 {
                     foreach (explode('.', $key) as $i => $string) {
                         if ($i === 0) {
-                            $result = include '../../config/' . $string . '.php';
+                            $result = include __DIR__ . '/../../config/' . $string . '.php';
                         } else {
                             $result = ($result ?? [])[$string] ?? [];
                         }
