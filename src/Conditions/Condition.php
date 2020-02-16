@@ -72,7 +72,7 @@ class Condition extends ConditionAbstract
         $method = 'where';
 
         try {
-            $isDate = ($value instanceof Carbon || is_string($value)) && Carbon::parse($value)->isValid();
+            $isDate = ($value instanceof Carbon || is_string($value)) && Carbon::parse($value);
         } catch (Exception $e) {
             $isDate = false;
         }
