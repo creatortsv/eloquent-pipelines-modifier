@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Carbon\Carbon;
 use Creatortsv\EloquentPipelinesModifier\Conditions\Condition;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class ConditionTest extends TestCase
 {

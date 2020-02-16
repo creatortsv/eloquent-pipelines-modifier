@@ -28,8 +28,12 @@
         }
     },
     "scripts": {
+        "lint": [
+            "./vendor/bin/phpcs --standard=PSR2 src/",
+            "./vendor/bin/phpcs --standard=PSR2 tests/"
+        ],
         "test": [
-            "vendor/bin/phpunit -v --coverage-text --colors=always"
+            "./vendor/bin/phpunit -v --coverage-text --colors=always --configuration phpunit.xml"
         ]
     }
 }

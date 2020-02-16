@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Creatortsv\EloquentPipelinesModifier\Conditions\Association;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class AssociationTest extends TestCase
 {
