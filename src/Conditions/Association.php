@@ -2,6 +2,8 @@
 
 namespace Creatortsv\EloquentPipelinesModifier\Conditions;
 
+use Illuminate\Support\Facades\Config;
+
 /**
  * Class Association
  * @package Creatortsv\EloquentPipelinesModifier\Conditions
@@ -23,7 +25,7 @@ class Association extends ConditionAbstract
      */
     public function parse(): string
     {
-        $result = str_replace(config('modifier.delimiters.associations'), ' as ', $this->value);
+        $result = str_replace(Config::get('modifier.delimiters.associations'), ' as ', $this->value);
         $sections = explode(' as ', $result);
         $this->name = $sections[0];
         $this->alias = $sections[1] ?? null;
