@@ -41,6 +41,17 @@ class Condition extends ConditionAbstract
     protected $relation;
 
     /**
+     * Condition constructor.
+     * @param $value
+     * @param string|null $name
+     */
+    public function __construct($value, string $name = null)
+    {
+        $this->name = $name;
+        parent::__construct($value);
+    }
+
+    /**
      * @return array
      */
     public static function conditions(): array

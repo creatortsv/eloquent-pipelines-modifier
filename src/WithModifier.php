@@ -21,6 +21,8 @@ trait WithModifier
         return app(Pipeline::class)
             ->send(self::query())
             ->through($modifiers ?: config('modifier.modifiers'))
-            ->thenReturn();
+            ->then(function ($builder) {
+                return $builder;
+            });
     }
 }
