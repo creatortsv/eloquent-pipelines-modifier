@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class With extends ModifierAbstract
 {
-
     /**
      * @param Builder $builder
      * @return Builder
@@ -19,7 +18,7 @@ class With extends ModifierAbstract
     protected function apply(Builder $builder): Builder
     {
         if (is_string($this->value)) {
-            return $builder->with($this->value);
+            return $builder->with(explode(config('modifier.delimiters.fields'), $this->value));
         }
 
         $data = [];

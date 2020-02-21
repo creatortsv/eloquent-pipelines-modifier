@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Builder;
  */
 class Sort extends ModifierAbstract
 {
-
     /**
      * @param Builder $builder
      * @return Builder
