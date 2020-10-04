@@ -34,7 +34,7 @@ trait WithModifier
             if (get_class($query->getParent()) !== static::class) {
                 throw new InvalidArgumentException('Relation query builder must be related of the Model class');
             }
-        } else if ($query instanceof Builder) {
+        } elseif ($query instanceof Builder) {
             if (get_class($query->getModel()) !== static::class) {
                 throw new InvalidArgumentException('Query must be query of the Model class');
             }
