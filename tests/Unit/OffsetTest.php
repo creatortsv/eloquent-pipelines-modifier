@@ -20,7 +20,9 @@ class OffsetTest extends TestCase
         $modifier = new Offset($request);
 
         $builder = new Builder(
-            $query = new \Illuminate\Database\Query\Builder(new PostgresConnection(function () {}))
+            $query = new \Illuminate\Database\Query\Builder(new PostgresConnection(function () {
+                //
+            }))
         );
 
         // 1. Non-reaction
