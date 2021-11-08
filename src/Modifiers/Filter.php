@@ -28,7 +28,7 @@ class Filter extends ModifierAbstract
      * @param string $value
      * @return array|null
      */
-    protected function extract(string $value)
+    protected function extract(string $value): ?array
     {
         if (($json = json_decode($value, true)) !== null) {
             return $json;

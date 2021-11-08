@@ -16,7 +16,7 @@ abstract class ModifierAbstract
     /**
      * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * @var array|string
@@ -26,7 +26,7 @@ abstract class ModifierAbstract
     /**
      * @var array
      */
-    protected $params;
+    protected array $params;
 
     /**
      * Modifier constructor.
@@ -50,9 +50,8 @@ abstract class ModifierAbstract
      * @param Closure $next
      * @return Builder
      */
-    public function handle($request, Closure $next): Builder
+    public function handle(Request $request, Closure $next): Builder
     {
-
         if ($this->value !== null) {
             return $this->apply($next($request));
         }

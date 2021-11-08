@@ -49,7 +49,7 @@ class Sort extends ModifierAbstract
             return $json;
         }
 
-        if ((bool)preg_match('/^\-?[a-z_.,]+$/', $value)) {
+        if (preg_match('/^\-?[a-z_.,]+$/', $value)) {
             return $value;
         }
 

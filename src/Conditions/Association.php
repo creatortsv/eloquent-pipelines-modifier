@@ -8,19 +8,9 @@ namespace Creatortsv\EloquentPipelinesModifier\Conditions;
  */
 class Association extends ConditionAbstract
 {
-    /**
-     * @var string
-     */
-    public $name;
+    public string $name;
+    public string $alias;
 
-    /**
-     * @var string
-     */
-    public $alias;
-
-    /**
-     * @return string
-     */
     public function parse(): string
     {
         $result = str_replace(config('modifier.delimiters.associations'), ' as ', $this->value);
@@ -32,8 +22,7 @@ class Association extends ConditionAbstract
     }
 
     /**
-     * @param mixed $value
-     * @return mixed
+     * @param array|string $value
      */
     public static function from($value): array
     {

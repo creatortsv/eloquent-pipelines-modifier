@@ -12,22 +12,20 @@ abstract class ModifierFactory
 {
     /**
      * @param Builder|Relation $query
-     * @param ModifierAbstract[] $modifiers
-     * @param Builder
+     * @param ModifierAbstract ...$modifiers
+     * @return Builder
      */
-    public static function modifyTo($query, array $modifiers = []): Builder
+    public static function modifyTo($query, ModifierAbstract ...$modifiers): Builder
     {
         $query instanceof Relation && ($query = $query->getQuery());
 
-        if (! ($query instanceof Builder)) {
+        if (!$query instanceof Builder) {
             throw new InvalidArgumentException('Wrong parameter $query');
         }
 
         return app(Pipeline::class)
             ->send($query)
             ->through($modifiers ?: config('modifier.modifiers'))
-            ->then(function ($builder) {
-                return $builder;
-            });
+            ->thenReturn();
     }
 }

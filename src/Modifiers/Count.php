@@ -51,7 +51,7 @@ class Count extends ModifierAbstract
             return $json;
         }
 
-        if ((bool)preg_match('/^[a-z][a-z_.,:]+[a-z]$/', $value)) {
+        if (preg_match('/^[a-z][a-z_.,:]+[a-z]$/', $value)) {
             return $value;
         }
 

@@ -30,7 +30,7 @@ class OrWhere extends ModifierAbstract
     /**
      * @inheritDoc
      */
-    protected function extract(string $value)
+    protected function extract(string $value): ?array
     {
         if (($json = json_decode($value, true)) !== null && is_array($json)) {
             return $json;

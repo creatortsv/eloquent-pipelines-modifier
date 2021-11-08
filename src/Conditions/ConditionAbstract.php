@@ -29,7 +29,7 @@ abstract class ConditionAbstract
 
     /**
      * @param mixed $value
-     * @return mixed
+     * @return array
      */
     abstract public static function from($value): array;
 }

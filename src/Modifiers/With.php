@@ -31,7 +31,7 @@ class With extends ModifierAbstract
 
     /**
      * @param string $value
-     * @return mixed
+     * @return array|string|null
      */
     protected function extract(string $value)
     {
@@ -39,7 +39,7 @@ class With extends ModifierAbstract
             return $json;
         }
 
-        if ((bool)preg_match('/^[a-z][a-z_.,:]+[a-z]$/', $value)) {
+        if (preg_match('/^[a-z][a-z_.,:]+[a-z]$/', $value)) {
             return $value;
         }
 

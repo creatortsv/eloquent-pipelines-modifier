@@ -11,7 +11,7 @@ class Offset extends ModifierAbstract
         return $builder->offset($this->value);
     }
 
-    protected function extract(string $value)
+    protected function extract(string $value): ?int
     {
         return is_numeric($value) ? (int) $value : null;
     }

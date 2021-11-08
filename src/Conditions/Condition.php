@@ -30,22 +30,15 @@ class Condition extends ConditionAbstract
     const CONDITION_GREATER_EQUAL = 'greater_equal';
     const CONDITION_LESS_EQUAL = 'less_equal';
 
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var string
-     */
-    protected $relation;
+    protected ?string $name;
+    protected string $relation;
 
     /**
      * Condition constructor.
      * @param $value
      * @param string|null $name
      */
-    public function __construct($value, string $name = null)
+    public function __construct($value, ?string $name = null)
     {
         $this->name = $name;
         parent::__construct($value);
@@ -113,7 +106,7 @@ class Condition extends ConditionAbstract
 
     /**
      * @param string $key
-     * @param $value
+     * @param mixed $value
      * @return array
      */
     public static function whichArgs(string $key, $value): array
@@ -170,9 +163,9 @@ class Condition extends ConditionAbstract
      * @param string|null $path
      * @return string|null
      */
-    public static function getRelationsPath($builder, string $path = null)
+    public static function getRelationsPath(Builder $builder, ?string $path = null): ?string
     {
-        if ((bool)$path) {
+        if ($path) {
             $model = $builder->getModel();
             foreach (explode(self::DELIMITER_RELATIONS, $path) as $name) {
                 if (method_exists($model, $name)) {
@@ -205,16 +198,7 @@ class Condition extends ConditionAbstract
      */
     public function parse(): Closure
     {
-        /**
-         * For filter {
-         *      posts.comments: 1,
-         *      posts.comments: {
-         *          greater: 1,
-         *          user.id: 1,
-         *          user_id: 1,
-         *      },
-         * }
-         */
+
         return (function ($builder): void {
             $relation = self::getRelationsPath($builder, $this->name);
             $column = str_replace($relation, '', (string)$this->name) ?: null;
