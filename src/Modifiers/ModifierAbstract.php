@@ -34,7 +34,12 @@ abstract class ModifierAbstract
      */
     public function __construct(Request $request)
     {
-        if (!is_string($this->name = array_search(get_class($this), config('modifier.modifiers')))) {
+        $this->name = array_search(
+            get_class($this),
+            config('modifier.modifiers'),
+        );
+
+        if (is_numeric($this->name)) {
             $this->name = '_' . Str::snake(class_basename($this));
         }
 

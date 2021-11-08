@@ -19,7 +19,6 @@ class LimitTest extends TestCase
     public function testHandle(): void
     {
         $request = new Request();
-
         $modifier = new Limit($request);
 
         $builder = new Builder(

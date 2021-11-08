@@ -9,7 +9,7 @@ namespace Creatortsv\EloquentPipelinesModifier\Conditions;
 class Association extends ConditionAbstract
 {
     public string $name;
-    public string $alias;
+    public ?string $alias;
 
     public function parse(): string
     {
